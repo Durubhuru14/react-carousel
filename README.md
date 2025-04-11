@@ -1,59 +1,107 @@
-## Figma URL
+# React Carousel Component
+
+![Preview](https://i.imgur.com/LjIu4y0.png)
+
+This repository contains two implementations of a carousel component in React:
+   - A custom-built carousel
+   - A carousel using the `react-slick` library
+
+## Figma URL of design
 
 [Slider](https://www.figma.com/file/QfMzzThSYmgabSvn4t8Yfe/Slider?node-id=0%3A1&t=IpsYjMUn3Xj3Hs3N-1)
 
-## Steps
+## Features
 
-#### Explore Data
+### Custom Carousel (`Carousel.jsx`)
+- Manual implementation without external dependencies
+- Smooth slide transitions using CSS transforms
+- Auto-advancing slides (2 second interval)
+- Previous/next navigation buttons
+- Circular navigation (wraps around at ends)
+- Responsive design
 
-Explore arrays in data.js
+### Slick Carousel (`SlickCarousel.jsx`)
+- Built using `react-slick` library
+- Auto-play functionality
+- Fade transition effect
+- Pause on hover
+- Navigation dots
+- Responsive by default
 
-#### Import Data and Set State Value
+## Installation
 
-Create Carousel.jsx, import all arrays from data.js and set up state value using the useState hook, use shortList as default value (for now).
+- Clone the repository:
+   ```bash
+   git clone https://github.com/Durubhuru14/react-carousel.git
+   ```
 
-#### Setup Container and Prev/Next Buttons
+- Install dependencies:
+   ```bash
+   cd react-carousel
+   npm install
+   ```
 
-In the return statement, set up a container element to hold all the slides. Inside the container, iterate over the people state value to create each slide.
+- Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-Set up prev and next buttons outside the container element. You can use the onClick event to trigger functions that will change the current slide.
+## Usage
 
-#### Setup CSS
+### Custom Carousel
+```jsx
+import Carousel from './Carousel';
 
-Use CSS to style the container and slides. Set the container to position:relative and the slides and prev/next buttons to position:absolute. You can also set the width and height of the container and slides to control their size.
-
-Switch default value in people state value. Set it equal to list or longList
-
-#### Main Logic
-
-To move the slides back and forth, use the transform property with a translateX value. For example, to move the slides to the left, you can use the transform:translateX(-100%) property however to move the slides to the right, you can use the transform:translateX(100%) property. For the active slide we will use transform:translateX(0)
-
-#### Current Person
-
-Create a currentPerson state value in App.jsx and set it to 0 initially. This will allow you to keep track of the current slide being displayed.
-
-#### Prev and Next
-
-Implement the prev and next functionality using the setCurrentPerson function to update the currentPerson state value.
-
-#### Auto Slide
-
-Implement the auto slide functionality using the setInterval function to change the currentPerson state value at regular intervals.
-
-#### Extra - React Slick Library
-
-[React Slick Docs](https://react-slick.neostack.com/)
-
-```sh
-npm install react-slick slick-carousel --save
+function App() {
+  return (
+    <div>
+      <Carousel />
+    </div>
+  );
+}
 ```
 
-Overall, the flow of the application should look something like this:
+### Slick Carousel
+```jsx
+import SlickCarousel from './SlickCarousel';
 
-- In App.jsx, import the people array from data.js and set it up as a state value using the useState hook.
-- In the return statement, set up a container element to hold all the slides, and iterate over the people state value to create each slide.
-- Set up prev and next buttons and style the container,slides and buttons.
-- Uncomment the rest of the items in the people array.
-- Create a currentPerson state value in App.jsx and set it to initially.
-- Implement the prev and next functionality using the setCurrentPerson function to update the currentPerson state value and move the slides back and forth using the transform property with a translateX value.
-- Implement the auto slide functionality using the setInterval function to change the currentPerson state value at regular intervals.
+function App() {
+  return (
+    <div>
+      <SlickCarousel />
+    </div>
+  );
+}
+```
+
+## Data Structure
+The carousels use data from `data.js` which contains:
+- `shortList`: Single item (for testing)
+- `list`: 4 items (default)
+- `longList`: 8 items (for extended testing)
+
+Each item has:
+- `id`: Unique identifier
+- `image`: URL of the person's image
+- `name`: Person's name
+- `title`: Person's title/position
+- `quote`: Testimonial quote
+
+## Dependencies
+- React
+- react-icons (for navigation icons)
+- react-slick (for SlickCarousel)
+- slick-carousel (styles for SlickCarousel)
+
+## Styling
+All styles are in `index.css` using CSS variables for consistent theming.
+
+## Switching Between Carousels
+In `App.jsx`, you can comment/uncomment the carousel components to switch between implementations:
+```jsx
+// To use custom carousel:
+<Carousel />
+
+// To use slick carousel:
+<SlickCarousel />
+```
